@@ -11,12 +11,18 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 	private static final Logger logger = LoggerFactory.getLogger(Handler.class);
 	
-	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
-		logger.info("Hello {}", "world");
+	public String helloMessage() {
+		String msg = "Hallo Welt";
 		
+		logger.info("Message: {}", msg);
+		
+		return msg;
+	}
+	
+	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
 		APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
 		response.setStatusCode(200);
-		response.setBody("hello world");
+		response.setBody(helloMessage());
 		
 		return response;
 	}
